@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>단위행렬</title>
+  </head>
+  <body>
+    <table id="my-table">
+
+
+    </table>
+  </body>
+</html>
+
+
+<script>
+
+(async ()=>{
+    const resData = await fetch('/board/list');
+    const result = await resData.json();
+
+    const myTable = document.getElementById('my-table');
+
+    console.log(result);
+    const htmlData = result.map(it => `
+        <tr>
+            <td> ${it.title} </td>
+            <td> ${it.writer} </td>
+            <td> ${it.content} </td>
+            <td> ${it.create_time} </td>
+        </tr>
+    `).join('');
+    myTable.innerHTML += `
+            <tr>
+                <td>제목</td>
+                <td>만든이</td>
+                <td>내용</td>
+                <td>만든시간</td>
+            </tr>
+            ${htmlData}
+    `;
+})();
+</script>

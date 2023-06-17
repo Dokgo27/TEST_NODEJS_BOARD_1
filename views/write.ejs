@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>단위행렬</title>
+  </head>
+  <body>
+    <form action="" name="my-board">
+    title: <input type="text" name="title"><br>
+    writer: <input type="text" name="write"><br>
+    content: <textarea name="content"></textarea>
+    <button type="submit">작성하기</button>
+    </form>
+  </body>
+</html>
+
+<script>
+const myBoard = document.forms["my-board"];
+myBoard.addEventListener('submit',async function (e){
+    e.preventDefault();
+
+    const bodyData = {
+        title: myBoard.title.value,
+        writer: myBoard.write.value,
+        content: myBoard.content.value,
+    }
+    await fetch('/board/write', {
+        method:'POST',
+        body:JSON.stringify(bodyData),
+        headers:{
+        'Content-Type': 'application/json'
+        }
+    });
+
+    location.href = '/board';
+
+});
+console.log(myBoard.title.value);
+</script>
